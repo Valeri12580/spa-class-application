@@ -1,0 +1,18 @@
+#footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: purple;
+    height: 75px;
+}
+
+
+#footer a:hover{
+    color:black;
+    transition-duration: 0.5s;
+}
+
+#footer> div > div:nth-child(2) > a{
+    margin-left: 550px;
+}

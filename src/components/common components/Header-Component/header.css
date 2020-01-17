@@ -1,0 +1,30 @@
+#header{
+    background-color: purple;
+    height: 75px;
+
+
+
+}
+
+a{
+    text-decoration: none;
+    color:white;
+
+
+
+}
+*{
+    font-family: cursive;
+}
+
+#header a:hover{
+    color:white;
+    transition-duration: 0.5s;
+    font-size:25px
+
+
+}
+
+#header>a:nth-child(1){
+    margin-left: 600px;
+}
