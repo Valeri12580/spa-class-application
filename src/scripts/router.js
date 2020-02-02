@@ -31,7 +31,7 @@ export default class App extends Component{
         this.state={
             isLogged:false
         }
-
+    //eto zashto renderva dva puti
         firebase.auth().onAuthStateChanged(user=>{
             if(user){
                 this.setState({isLogged:true})
