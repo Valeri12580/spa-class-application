@@ -16,6 +16,7 @@ import Register from "../components/Register-Component/register.js"
 import Login from "../components/Login-Component/login.js"
 import Logout from "../components/Logout-Component/logout.js"
 import Add from "../components/Add-Component/add.js"
+import Details from "../components/Detail-Component/details.js"
 //end of component imports
 
 //firebase imports
@@ -79,6 +80,12 @@ export default class App extends Component{
                 <Route path="/add">
                     <Header isLogged={this.state.isLogged}></Header>
                     <Add/>
+                    <Footer/>
+                </Route>
+
+                <Route path="/details/:id" component={<Details/>} >
+                    <Header isLogged={this.state.isLogged}></Header>
+
                     <Footer/>
                 </Route>
 

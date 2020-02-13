@@ -5,6 +5,7 @@ import React from 'react';
 //css imports
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./home.css"
+import "./gallery.css"
 //end of css imports
 
 //fonts/icons imports
@@ -62,7 +63,19 @@ export default class Home extends React.Component {
 
                 return (
                     <React.Fragment>
-                       {this.state.arr.map(e=><img src={e}/>)}
+                       <div className="gallery">
+                           {this.state.arr.map(e=>{
+
+                               return <a>
+
+                                   <a href={"/details/"+e}><img src={e}></img></a>
+
+
+                               </a>
+                           })}
+
+
+                       </div>
                     </React.Fragment>
                 )
             } else {
