@@ -17,6 +17,7 @@ import noContent from "../../images/noContent.jpg"
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/storage"
+import {Link} from "react-router-dom";
 //end of firebase imports
 
 //premesti go drugade
@@ -43,7 +44,7 @@ export default class Home extends React.Component {
             result.items.forEach((e) => {
 
                 e.getDownloadURL().then((url) => {
-
+                    url=url.substr(url.indexOf("/",42)+1)
                     imagesUrls.push(url)
                 }).then(()=>self.setState({arr:imagesUrls}))
             })
@@ -64,14 +65,10 @@ export default class Home extends React.Component {
                 return (
                     <React.Fragment>
                        <div className="gallery">
-                           {this.state.arr.map(e=>{
+                           {this.state.arr.map(id=>{
 
-                               return <a>
+                               return <Link to ={`/details/${id}`}> <img src={"https:/firebasestorage.googleapis.com/v0/b/"+id}></img></Link>
 
-                                   <a href={"/details/"+e}><img src={e}></img></a>
-
-
-                               </a>
                            })}
 
 

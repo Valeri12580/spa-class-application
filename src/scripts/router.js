@@ -1,5 +1,5 @@
 //react imports
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 import {
   BrowserRouter,
   Switch,
@@ -47,12 +47,12 @@ export default class App extends Component{
    
     render(){
         
-      
+
     
         return( 
             <BrowserRouter>
             <Switch>
-                <Route exact path="/">
+                <Route exact path="/" exact>
                 <Header isLogged={this.state.isLogged}/>
                 <Home isLogged={this.state.isLogged}/>
                 <Footer/>
@@ -72,22 +72,26 @@ export default class App extends Component{
                 </Route>
 
                 <Route path="/logout">
-                    <Header isLogged={this.state.isLogged}></Header>
+                    <Header isLogged={this.state.isLogged}/>
                     <Logout/>
                     <Footer/>
                 </Route>
 
                 <Route path="/add">
-                    <Header isLogged={this.state.isLogged}></Header>
+                    <Header isLogged={this.state.isLogged}/>
                     <Add/>
                     <Footer/>
                 </Route>
 
-                <Route path="/details/:id" component={<Details/>} >
-                    <Header isLogged={this.state.isLogged}></Header>
+                //raboti
+                <Route path="/details/:id"  render={(props)=>
+                    <Fragment>
+                        <Header isLogged={this.state.isLogged}/>
+                        <Details {...props}/>
+                        <Footer/>
 
-                    <Footer/>
-                </Route>
+                    </Fragment>
+                } />
 
                 
             </Switch>
@@ -98,3 +102,4 @@ export default class App extends Component{
            )
     }
 }
+
