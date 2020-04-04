@@ -27,7 +27,9 @@ export default class Login extends React.Component {
 
     }
 
+
     handleEmailChange(e) {
+
         this.setState({ email: e.target.value })
     }
     handlePasswordChange(e){
@@ -35,6 +37,7 @@ export default class Login extends React.Component {
     
     }
     handleSubmit(e){
+
         e.preventDefault()
         firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then(()=>this.setState({redirect:true})).catch(e=>{
             alert(e.message)

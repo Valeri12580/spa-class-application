@@ -22,7 +22,7 @@ import {Link} from "react-router-dom";
 
 //premesti go drugade
 const firebaseConfig = {
-    
+   
 };
 
 firebase.initializeApp(firebaseConfig);
