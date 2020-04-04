@@ -19,13 +19,13 @@ export default class Add extends React.Component {
 
     constructor(props) {
         super(props)
-        this.state={
-            percents:15
+        this.state = {
+            percents: 15
         }
 
 
-
     }
+
 
 
 
@@ -36,74 +36,74 @@ export default class Add extends React.Component {
         e.preventDefault()
 
         let inputFile = document.getElementById("file").files[0];
-        try{
-            let storageRef=firebase.storage().ref("resources/"+inputFile.name);
-            let task=storageRef.put(inputFile)
+        let storageRef = firebase.storage().ref("resources/" + inputFile.name);
+        try {
 
-            let progressBar=document.getElementById("progress-bar")
-            task.on("state_changed",function progress(snapshot) {
-                    let percents=parseInt(snapshot.bytesTransferred/snapshot.totalBytes*100)+"%"
-                    progressBar.textContent=percents;
-                    progressBar.style.width=percents
+            let task = storageRef.put(inputFile, {
+                customMetadata: {
+                    "author": firebase.auth().currentUser.email,
+                    "createdOn": getCreationTime(),
+                    "likes": 0
+                }
+            })
+
+            let progressBar = document.getElementById("progress-bar")
+            task.on("state_changed", function progress(snapshot) {
+                let percents = parseInt(snapshot.bytesTransferred / snapshot.totalBytes * 100) + "%"
+                progressBar.textContent = percents;
+                progressBar.style.width = percents
 
 
-
-
-            },function error (error) {
+            }, function error(error) {
                 alert(error.message)
 
-            },function complete(complete) {
-                let alert=document.getElementById("alert-success");
-                alert.style.display="inline";
+            }, function complete(complete) {
 
 
-                document.getElementById("removeSuccessAlertBtn").addEventListener("click",function (e) {
-                    alert.style.display="none";
+                let alert = document.getElementById("alert-success");
+                alert.style.display = "inline";
+
+
+                document.getElementById("removeSuccessAlertBtn").addEventListener("click", function (e) {
+                    alert.style.display = "none";
                     window.location.reload()
                 })
 
 
-
-
-
             })
 
 
-
-        }catch(error){
-            let alert=document.getElementById("alert-warning");
-            alert.style.display="inline";
-            document.getElementById("removeWarningAlertBtn").addEventListener("click",function (e) {
-                alert.style.display="none"
+        } catch (error) {
+            let alert = document.getElementById("alert-warning");
+            alert.style.display = "inline";
+            document.getElementById("removeWarningAlertBtn").addEventListener("click", function (e) {
+                alert.style.display = "none"
             })
         }
-
 
 
     }
 
 
-
-
     render() {
         //napravi errora kato komponent s prop i da priema message.
-        return <form  onSubmit={this.handleSubmit}>
+        return <form onSubmit={this.handleSubmit}>
 
             {/*warning*/}
-            <div id="alert-warning" className="container" style={{display:"none"}}>
+            <div id="alert-warning" className="container" style={{display: "none"}}>
                 <div className="alert alert-danger alert-dismissible fade show  text-center">
                     You must upload at least one file.
-                    <button id="removeWarningAlertBtn"type="button" className="close"  aria-label="Close">
+                    <button id="removeWarningAlertBtn" type="button" className="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
             </div>
 
             {/*success*/}
-            <div id="alert-success" className="container" style={{display:"none"}}>
+            <div id="alert-success" className="container" style={{display: "none"}}>
                 <div className="alert alert-success alert-dismissible fade show  text-center">
                     File/files are uploaded successful.
-                    <button id="removeSuccessAlertBtn"type="button" className="close"  aria-label="Close">
+                    <button id="removeSuccessAlertBtn" type="button" className="close" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -115,7 +115,7 @@ export default class Add extends React.Component {
                     <div className="col-12 text-center">
 
                         <ProgressBar/>
-                        <input id = "file" className="mt-3" type="file"/>
+                        <input id="file" className="mt-3" type="file"/>
                         <input className="btn btn-info mt-4" style={{background: "purple"}} type="submit"/>
 
 
@@ -134,4 +134,12 @@ function ProgressBar(props) {
         </div>
 
     </div>
+}
+
+function getCreationTime() {
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date + ' ' + time;
+    return dateTime
 }
