@@ -1,5 +1,5 @@
-**Learning React.The code is not very good but right now it is not my priority to fix it.**
-**Using Google Firebase as back-end**
+## **Learning React.The code is not very good but right now it is not my priority to fix it.**
+## **Using Google Firebase as back-end**
 
 
 
